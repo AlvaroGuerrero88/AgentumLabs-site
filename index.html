@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentum Labs | Agentes de Inteligencia Artificial y Automatización</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /*
+        ============================================================
+        VARIABLES CSS (ADAPTADO AL ESTILO BLUNEX/TECH DARK MODE)
+        ============================================================
+        */
+        :root {
+            /* Colores de Agentum Labs */
+            --color-bg-primary: #0A0A10; /* Negro muy oscuro/Azul noche */
+            --color-text-primary: #FFFFFF;
+            --color-surface: #151520; /* Superficies de cards y secciones */
+            --color-accent: #00E5FF; /* Azul Eléctrico / Cian para CTAs y highlights */
+            --color-accent-darker: #00BFFF;
+            --color-neutral-border: #2A2A38;
+            --color-text-secondary: #B0B0B0;
+
+            /* Espaciado */
+            --spacing-m: 16px;
+            --spacing-l: 32px;
+            --spacing-xl: 80px;
+            --spacing-xxl: 120px;
+            
+            /* Tipografía */
+            --font-display: 'Inter', sans-serif;
+        }
+
+        /*
+        ============================================================
+        ESTILOS BASE Y UTILITIES
+        ============================================================
+        */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-m);
+        }
+        
+        .section {
+            padding: var(--spacing-xxl) 0;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            line-height: 1.1;
+            font-weight: 800; /* Peso pesado para impacto */
+            margin-bottom: var(--spacing-m);
+        }
+        
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.75rem; }
+        h2 {margin-top: 50px; /* Empuja el título 50px hacia abajo */
+        }
+
+        .text-accent {
+            color: var(--color-accent);
+        }
+
+        /*
+        ============================================================
+        COMPONENTES Y PATRONES
+        ============================================================
+        */
+
+        /* Header */
+        .header {
+            background-color: var(--color-bg-primary);
+            padding: var(--spacing-m) 0;
+            border-bottom: 1px solid var(--color-neutral-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-accent);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .nav-links a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            margin-left: var(--spacing-l);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Botones CTA */
+        .btn-cta {
+            display: inline-block;
+            background-color: var(--color-accent);
+            color: var(--color-bg-primary);
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.4); /* Sutil glow */
+        }
+
+        .btn-cta:hover {
+            background-color: var(--color-accent-darker);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+        }
+
+        /* Sección Hero */
+        .hero {
+            padding: var(--spacing-xxl) 0 var(--spacing-xl) 0;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            max-width: 800px;
+            margin: var(--spacing-m) auto var(--spacing-l) auto;
+        }
+        
+        /* Cards de Características (Glow Pattern) */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-l);
+            margin-top: var(--spacing-xl);
+            text-align: left;
+        }
+
+        .feature-card {
+            background-color: var(--color-surface);
+            padding: var(--spacing-l);
+            border-radius: 8px;
+            border: 1px solid var(--color-neutral-border);
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--color-accent);
+            /* Pequeño efecto de elevación y glow al pasar el ratón */
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+        }
+
+        .feature-card h3 {
+            color: var(--color-accent);
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--color-surface);
+            border-top: 1px solid var(--color-neutral-border);
+            padding: var(--spacing-l) 0;
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .section { padding: var(--spacing-xl) 0; }
+            .nav-content { flex-direction: column; }
+            .nav-links { margin-top: var(--spacing-m); }
+        }
+
+        /* Nuevo estilo para la foto del testimonio */
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-m);
+            border-bottom: 1px solid var(--color-neutral-border);
+            padding-bottom: var(--spacing-m);
+        }
+
+                /* ⬇️⬇️ DEBES AGREGAR ESTO ⬇️⬇️ */
+        .testimonial-header > div:last-child {
+            /* 15px es un buen espaciado. Ajusta si lo quieres más grande. */
+            margin-left: 15px; 
+        }
+
+        .testimonial-photo {
+            width: 80px; /* ¡Aumentado! */
+            height: 80px; /* ¡Aumentado! */
+            border-radius: 50%;
+            /* ... el resto del código ... */
+        }
+
+        .testimonial-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            margin: var(--spacing-m) 0;
+            padding: var(--spacing-m);
+            background-color: rgba(0, 229, 255, 0.05); /* Fondo sutil de cita */
+            border-left: 4px solid var(--color-accent);
+        }
+        /* 💡 SOLUCIÓN DEFINITIVA (AGRESIVA) PARA MENÚ FIJO 💡 */
+        /* Reemplaza la técnica scroll-margin-top, que a veces falla. */
+        #servicios, #casos-exito {
+            /* 1. Jala la sección hacia arriba para que el ID quede bajo el header */
+            margin-top: -100px; 
+            /* 2. Añade espacio en la parte superior para empujar el contenido hacia abajo. */
+            /* El '!important' asegura que anule cualquier otro padding que ya exista. */
+            padding-top: 100px !important;
+        }
+
+        /*
+        ============================================================
+        ESTILOS DEL FORMULARIO DE CONTACTO
+        ============================================================
+        */
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: var(--spacing-l);
+            background-color: var(--color-surface);
+            border-radius: 8px;
+            border: 1px solid var(--color-neutral-border);
+            text-align: left; /* Alineamos el texto a la izquierda dentro del form */
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-m);
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form input[type="tel"] {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--color-bg-primary); /* Fondo oscuro */
+            border: 1px solid var(--color-neutral-border);
+            color: var(--color-text-primary);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input::placeholder {
+            color: var(--color-text-secondary);
+        }
+
+        .contact-form input:focus {
+            border-color: var(--color-accent);
+            outline: none;
+        }
+
+        /* Ajuste del botón en el formulario */
+        .contact-form .btn-cta {
+            width: 100%;
+            text-align: center;
+            margin-top: var(--spacing-m);
+        }
+
+        /* Añade esto a tu CSS de .contact-form input */
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--color-bg-primary); 
+            border: 1px solid var(--color-neutral-border);
+            color: var(--color-text-primary);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            resize: vertical; /* Permite al usuario ajustar solo la altura */
+        }
+
+        .contact-form textarea:focus {
+            border-color: var(--color-accent);
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container nav-content">
+            <a href="https://agentumlabs.com" class="logo">Agentum Labs</a>
+        <nav class="nav-links">
+            <a href="#servicios">Servicios</a> 
+            <a href="#casos-exito">Casos de Éxito</a>
+            <a href="#contacto">Contáctanos</a> 
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero section">
+            <div class="container">
+                <h1>
+                    <span style="color: var(--color-text-primary);">El Futuro de la Operación Empresarial:</span><br>
+                    <span class="text-accent">Agentes de Inteligencia Artificial 24/7</span> a tu Servicio
+                </h1>
+                <p>
+                    Diseñamos, construimos y desplegamos <b>Agentes de Inteligencia Artificial</b> personalizados que ofrecen asistencia, resuelven dudas complejas y guían a los prospectos con el fin de concretar ventas en segundos.
+                </p>
+                <a href="#contacto" class="btn-cta">Comenzar Ahora</a>
+            </div>
+        </section>
+
+        <section class="section" id="servicios" style="padding-top: 0;">
+            <div class="container">
+                <h2>Nuestros servicios clave</h2> 
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Agentes de IA para Atención al Cliente y Ventas</h3>
+                        <p style="color: var(--color-text-secondary);">
+                            Atiende a tus clientes 24/7 con agentes virtuales que responden al instante, resuelven dudas y convierten conversaciones en ventas.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Agentes de Voz Telefónicos</h3>
+                        <p style="color: var(--color-text-secondary);">
+                            Implementamos sistemas de voz inteligentes que atienden llamadas, responden preguntas y realizan gestiones como si fueran un operador humano.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Automatización de Facturas</h3>
+                        <p style="color: var(--color-text-secondary);">
+                            Digitalizamos y automatizamos el proceso de gestión de facturas, reduciendo errores y ahorrando tiempo en tareas repetitivas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section" style="background-color: var(--color-surface);">
+            <div class="container">
+                <h2>Por qué elegir <span class="text-accent">Agentum Labs</span></h2>
+                <p style="color: var(--color-text-secondary); max-width: 800px; margin: 0 auto var(--spacing-xl);">
+                    No vendemos flujos de trabajo; vendemos la liberación de su equipo para que se dediquen 100% a la conversión y las relaciones humanas.
+                </p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Plataformas de Control Operativo (PCO)</h3>
+                        <p>Dashboards que te permiten monitorear el rendimiento de tus agentes y ejecutar procesos complejos de reconciliación con un clic.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Agentes de Compliance y Detección</h3>
+                        <p>Sistemas automatizados para monitoreo 24/7 de anomalías, fraude o incumplimientos, con protocolos de respuesta inmediata.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Optimización de Flujos Comerciales</h3>
+                        <p>Especialización en la automatización de flujos de marketing, ventas y soporte post-venta, garantizando coherencia en la interacción con el cliente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section class="section" id="casos-exito">
+            <div class="container">
+                <h2>Historias de <span class="text-accent">Éxito Real</span></h2>
+                <p style="color: var(--color-text-secondary); max-width: 800px; margin: 0 auto var(--spacing-xl);">
+                    Conozca las experiencias verificables de líderes empresariales que ya han integrado Agentes de IA de Agentum Labs en su operación diaria.
+                </p>
+
+                <div class="features-grid">
+                    
+                    <div class="feature-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-photo">
+                                <img src="img/alvaro.jpeg" alt="Foto de Alvaro G.">
+                            </div>
+                            <div>
+                                <h3 style="color: var(--color-accent); margin-bottom: 5px;">Alvaro G.</h3>
+                                <p style="color: var(--color-text-secondary); font-weight: 600; font-size: 0.9rem;">Fundador, Consultoría IT</p>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-quote">
+                            "Antes perdíamos 3 horas diarias filtrando leads. Ahora, nuestros Agentes hacen todo el trabajo y el equipo solo se enfoca en <b>cerrar</b>."
+                        </div>
+                        
+                        <p style="font-weight: 700; margin-top: 15px;">Resultados Clave:</p>
+                        <ul>
+                            <li style="list-style: none; margin-bottom: 5px;">✅ <strong style="color: var(--color-accent);">40% de Aumento</strong> en la tasa de leads listos para reunión.</li>
+                            <li style="list-style: none; margin-bottom: 5px;">✅ <strong style="color: var(--color-accent);">3 Horas Diarias</strong> de ahorro en tareas de cualificación.</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-photo">
+                                <img src="img/lileana.jpeg" alt="Foto de Lileana R.">
+                            </div>
+                            <div>
+                                <h3 style="color: var(--color-accent); margin-bottom: 5px;">Lileana R.</h3>
+                                <p style="color: var(--color-text-secondary); font-weight: 600; font-size: 0.9rem;">Gerente de Operaciones, Tienda Tech</p>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-quote">
+                            "La Plataforma de Control nos dio visibilidad total. Ya no hay errores de stock y nuestro AOV subió gracias a las <b>ofertas automáticas</b> del Agente."
+                        </div>
+
+                        <p style="font-weight: 700; margin-top: 15px;">Resultados Clave:</p>
+                        <ul>
+                            <li style="list-style: none; margin-bottom: 5px;">✅ <strong style="color: var(--color-accent);">15% de Incremento</strong> en el Valor Promedio de Pedido (AOV).</li>
+                            <li style="list-style: none; margin-bottom: 5px;">✅ <strong style="color: var(--color-accent);">98% de Reducción</strong> en errores de conciliación manual.</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-photo">
+                                <img src="img/lucia.jpeg" alt="Foto de Lucía G.">
+                            </div>
+                            <div>
+                                <h3 style="color: var(--color-accent); margin-bottom: 5px;">Lucía G.</h3>
+                                <p style="color: var(--color-text-secondary); font-weight: 600; font-size: 0.9rem;">Socio Director, Despacho Legal</p>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-quote">
+                            "La paz mental de saber que el Agente monitorea el compliance 24/7 no tiene precio. El riesgo de multas se ha eliminado por completo."
+                        </div>
+
+                        <p style="font-weight: 700; margin-top: 15px;">Resultados Clave:</p>
+                        <ul>
+                            <li style="list-style: none; margin-bottom: 5px;">✅ <strong style="color: var(--color-accent);">Cero Multas</strong> por incumplimiento normativo en 12 meses.</li>
+                            <li style="list-style: none; margin-bottom: 5px;">✅ <strong style="color: var(--color-accent);">25% de Ahorro</strong> en costos de personal de vigilancia.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contacto">
+            <div class="container">
+                <h2>¿Listo para <span class="text-accent">Transformar</span> tu Operación?</h2>
+                <p style="color: var(--color-text-secondary); max-width: 600px; margin: 0 auto var(--spacing-l);">
+                    <p style="color: var(--color-text-secondary); max-width: 600px; margin: 0 auto var(--spacing-l);">
+                    Agenda una consultoría gratuita para descubrir cómo Agentum Labs puede implementar tu primer agente de IA.
+                </p>
+                
+                <form action="tu_url_de_procesamiento" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <input type="text" name="nombre" placeholder="Tu Nombre Completo" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Correo Electrónico Empresarial" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="telefono" placeholder="Teléfono/WhatsApp" required>
+                    </div>
+                    <div class="form-group">
+                    <textarea name="mensaje" placeholder="Describe brevemente tu consulta o el desafío que deseas resolver con IA" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-cta">Enviar Solicitud</button>
+                    <p style="color: var(--color-text-secondary); font-size: 0.8rem; margin-top: 15px;">Nos pondremos en contacto en menos de 24 horas.</p>
+                </form>
+                </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Agentum Labs. Todos los derechos reservados. | <a href="#" style="color: var(--color-text-secondary);">Privacidad</a> | <a href="#" style="color: var(--color-text-secondary);">Términos</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>
