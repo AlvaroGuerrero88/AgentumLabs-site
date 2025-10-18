@@ -99,12 +99,15 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--color-accent);
-            text-decoration: none;
-            text-transform: uppercase;
+        .logo-img {
+            height: 70px; /* Ajusta este valor según el tamaño que quieras */
+            width: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-img:hover {
+            opacity: 0.8;
         }
 
         .nav-links a {
@@ -318,7 +321,9 @@
 
     <header class="header">
         <div class="container nav-content">
-            <a href="https://agentumlabs.com" class="logo">Agentum Labs</a>
+            <a href="https://agentumlabs.com" class="logo">
+                <img src="img/agentum-logo.png" alt="Agentum Labs" class="logo-img">
+            </a>
         <nav class="nav-links">
             <a href="#servicios">Servicios</a> 
             <a href="#casos-exito">Casos de Éxito</a>
