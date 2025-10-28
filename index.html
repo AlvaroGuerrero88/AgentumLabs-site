@@ -514,9 +514,43 @@
                     <div class="form-group">
                         <input type="email" name="email" placeholder="Correo Electrónico Empresarial" required>
                     </div>
+                    
+                    <!-- NUEVO: Select de país -->
                     <div class="form-group">
-                        <input type="tel" name="telefono" placeholder="Teléfono/WhatsApp" required>
+                        <select name="pais" required>
+                            <option value="">Selecciona tu país</option>
+                            <option value="+54">🇦🇷 Argentina (+54)</option>
+                            <option value="+591">🇧🇴 Bolivia (+591)</option>
+                            <option value="+55">🇧🇷 Brasil (+55)</option>
+                            <option value="+56">🇨🇱 Chile (+56)</option>
+                            <option value="+57">🇨🇴 Colombia (+57)</option>
+                            <option value="+506">🇨🇷 Costa Rica (+506)</option>
+                            <option value="+53">🇨🇺 Cuba (+53)</option>
+                            <option value="+593">🇪🇨 Ecuador (+593)</option>
+                            <option value="+503">🇸🇻 El Salvador (+503)</option>
+                            <option value="+502">🇬🇹 Guatemala (+502)</option>
+                            <option value="+504">🇭🇳 Honduras (+504)</option>
+                            <option value="+52">🇲🇽 México (+52)</option>
+                            <option value="+505">🇳🇮 Nicaragua (+505)</option>
+                            <option value="+507">🇵🇦 Panamá (+507)</option>
+                            <option value="+595">🇵🇾 Paraguay (+595)</option>
+                            <option value="+51">🇵🇪 Perú (+51)</option>
+                            <option value="+1-pr">🇵🇷 Puerto Rico (+1)</option>
+                            <option value="+1-do">🇩🇴 República Dominicana (+1)</option>
+                            <option value="+598">🇺🇾 Uruguay (+598)</option>
+                            <option value="+58">🇻🇪 Venezuela (+58)</option>
+                            <option value="+34">🇪🇸 España (+34)</option>
+                            <option value="+1-us">🇺🇸 Estados Unidos (+1)</option>
+                            <option value="+1-ca">🇨🇦 Canadá (+1)</option>
+                            <option value="otro">🌎 Otro país</option>
+                        </select>
                     </div>
+                    
+                    <!-- MODIFICADO: Placeholder actualizado -->
+                    <div class="form-group">
+                        <input type="tel" name="telefono" placeholder="Número de WhatsApp (sin código de país)" required>
+                    </div>
+                    
                     <div class="form-group">
                         <textarea name="mensaje" placeholder="Describe brevemente tu consulta o el desafío que deseas resolver con IA" rows="4" required></textarea>
                     </div>
@@ -547,7 +581,9 @@ document.getElementById('contactForm').addEventListener('submit', async function
     const formData = {
         nombre: this.querySelector('input[name="nombre"]').value,
         email: this.querySelector('input[name="email"]').value,
+        pais: this.querySelector('select[name="pais"]').value,
         telefono: this.querySelector('input[name="telefono"]').value,
+        telefono_completo: this.querySelector('select[name="pais"]').value.replace('-us', '').replace('-ca', '').replace('-pr', '').replace('-do', '') + this.querySelector('input[name="telefono"]').value,
         mensaje: this.querySelector('textarea[name="mensaje"]').value,
         fecha: new Date().toISOString()
     };
