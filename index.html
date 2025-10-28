@@ -504,11 +504,10 @@
             <div class="container">
                 <h2>¿Listo para <span class="text-accent">Transformar</span> tu Operación?</h2>
                 <p style="color: var(--color-text-secondary); max-width: 600px; margin: 0 auto var(--spacing-l);">
-                    <p style="color: var(--color-text-secondary); max-width: 600px; margin: 0 auto var(--spacing-l);">
                     Agenda una consultoría gratuita para descubrir cómo Agentum Labs puede implementar tu primer agente de IA.
                 </p>
                 
-                <form action="tu_url_de_procesamiento" method="POST" class="contact-form">
+                <form id="contactForm" class="contact-form">
                     <div class="form-group">
                         <input type="text" name="nombre" placeholder="Tu Nombre Completo" required>
                     </div>
@@ -519,10 +518,10 @@
                         <input type="tel" name="telefono" placeholder="Teléfono/WhatsApp" required>
                     </div>
                     <div class="form-group">
-                    <textarea name="mensaje" placeholder="Describe brevemente tu consulta o el desafío que deseas resolver con IA" rows="4" required></textarea>
+                        <textarea name="mensaje" placeholder="Describe brevemente tu consulta o el desafío que deseas resolver con IA" rows="4" required></textarea>
                     </div>
                     <button type="submit" class="btn-cta">Enviar Solicitud</button>
-                    <p style="color: var(--color-text-secondary); font-size: 0.8rem; margin-top: 15px;">Nos pondremos en contacto en menos de 24 horas.</p>
+                    <p id="formStatus" style="color: var(--color-text-secondary); font-size: 0.8rem; margin-top: 15px; display: none;"></p>
                 </form>
                 </div>
         </section>
@@ -533,6 +532,53 @@
             <p>&copy; 2025 Agentum Labs. Todos los derechos reservados. | <a href="#" style="color: var(--color-text-secondary);">Privacidad</a> | <a href="#" style="color: var(--color-text-secondary);">Términos</a></p>
         </div>
     </footer>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const btn = this.querySelector('.btn-cta');
+    const status = document.getElementById('formStatus');
+    const originalText = btn.textContent;
+    
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+    
+    const formData = {
+        nombre: this.querySelector('input[name="nombre"]').value,
+        email: this.querySelector('input[name="email"]').value,
+        telefono: this.querySelector('input[name="telefono"]').value,
+        mensaje: this.querySelector('textarea[name="mensaje"]').value,
+        fecha: new Date().toISOString()
+    };
+    
+    try {
+        const response = await fetch('https://n8n.agentumlabs.com/webhook-test/contact-form', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        if (response.ok) {
+            status.style.display = 'block';
+            status.style.color = 'var(--color-accent)';
+            status.textContent = '✅ ¡Mensaje enviado! Nos pondremos en contacto en menos de 24 horas.';
+            this.reset();
+        } else {
+            throw new Error('Error en el envío');
+        }
+    } catch (error) {
+        status.style.display = 'block';
+        status.style.color = '#ff4444';
+        status.textContent = '❌ Hubo un error. Por favor intenta de nuevo o contáctanos por WhatsApp.';
+    } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
+    }
+});
+</script>
 
 </body>
 </html>
