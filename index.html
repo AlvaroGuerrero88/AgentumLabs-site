@@ -572,6 +572,14 @@
                     </div>
                     <button type="submit" class="btn-cta">Enviar Solicitud</button>
                     <p id="formStatus" style="color: var(--color-text-secondary); font-size: 0.8rem; margin-top: 15px; display: none;"></p>
+                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; margin-top: 20px; text-align: center;">
+                        ¿Prefieres hablar ahora? 
+                        <a href="https://wa.me/51942373416?text=Hola%2C%20vengo%20desde%20la%20web%20de%20Agentum%20Labs" 
+                        target="_blank" 
+                        style="color: var(--color-accent); text-decoration: none; font-weight: 600;">
+                            💬 Escríbenos por WhatsApp
+                        </a>
+                    </p>
                 </form>
                 </div>
         </section>
@@ -631,6 +639,57 @@ document.getElementById('contactForm').addEventListener('submit', async function
     }
 });
 </script>
+
+<a href="https://wa.me/51942373416?text=Hola%2C%20vengo%20desde%20la%20web%20de%20Agentum%20Labs%20y%20me%20gustaría%20conocer%20más%20sobre%20sus%20agentes%20de%20IA" 
+   class="whatsapp-float" 
+   target="_blank"
+   aria-label="Contactar por WhatsApp">
+    <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 0C7.164 0 0 7.164 0 16c0 2.828.744 5.48 2.04 7.78L0 32l8.384-2.196A15.934 15.934 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.333c-2.548 0-4.94-.708-6.98-1.94l-.5-.296-5.18 1.356 1.38-5.048-.324-.52A13.27 13.27 0 012.667 16c0-7.364 5.97-13.333 13.333-13.333S29.333 8.636 29.333 16 23.364 29.333 16 29.333z" fill="currentColor"/>
+        <path d="M23.334 19.167c-.334-.167-1.984-.98-2.292-1.084-.308-.104-.532-.167-.756.167-.224.333-.868 1.083-1.064 1.308-.196.224-.392.252-.726.084-.334-.167-1.408-.52-2.684-1.656-.992-.884-1.66-1.976-1.856-2.308-.196-.334-.02-.516.148-.68.148-.148.334-.392.5-.588.168-.196.224-.334.336-.556.112-.224.056-.42-.028-.588-.084-.168-.756-1.82-1.036-2.492-.272-.652-.548-.564-.756-.576-.196-.008-.42-.012-.644-.012-.224 0-.588.084-.896.42-.308.333-1.176 1.148-1.176 2.8s1.204 3.248 1.372 3.472c.168.224 2.372 3.62 5.748 5.076.804.348 1.432.556 1.92.712.808.256 1.544.22 2.124.132.648-.096 1.984-.812 2.264-1.596.28-.784.28-1.456.196-1.596-.084-.14-.308-.224-.644-.392z" fill="currentColor"/>
+    </svg>
+</a>
+
+<style>
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: #FFF;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    background-color: #20BA5A;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .whatsapp-float svg {
+        width: 30px;
+        height: 30px;
+    }
+}
+</style>
 
 </body>
 </html>
