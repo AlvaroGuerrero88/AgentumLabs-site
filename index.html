@@ -221,12 +221,53 @@
         }
 
         /* Media Queries */
+        /* Media Queries */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             h2 { font-size: 2rem; }
             .section { padding: var(--spacing-xl) 0; }
-            .nav-content { flex-direction: column; }
-            .nav-links { margin-top: var(--spacing-m); }
+            
+            .logo-img {
+                height: 50px;
+            }
+            
+            .nav-content {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            /* Mostrar hamburguesa en móvil */
+            .hamburger {
+                display: flex;
+            }
+            
+            /* Ocultar enlaces por defecto en móvil */
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background-color: var(--color-surface);
+                width: 200px;
+                padding: var(--spacing-m);
+                border-radius: 8px;
+                border: 1px solid var(--color-neutral-border);
+                transition: right 0.3s ease;
+                margin: 0;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            }
+            
+            /* Mostrar cuando está activo */
+            .nav-links.active {
+                right: 16px;
+            }
+            
+            .nav-links a {
+                margin: 8px 0;
+                margin-left: 0;
+                display: block;
+                padding: 8px;
+            }
         }
 
         /* Nuevo estilo para la foto del testimonio */
@@ -356,6 +397,21 @@
             border-color: var(--color-accent);
             outline: none;
         }
+
+        /* Botón hamburguesa (oculto en desktop) */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color-text-primary);
+            transition: 0.3s;
+        }
     </style>
 </head>
 <body>
@@ -365,10 +421,18 @@
             <a href="https://agentumlabs.com" class="logo">
                 <img src="img/agentum-logo.png" alt="Agentum Labs" class="logo-img">
             </a>
-        <nav class="nav-links">
-            <a href="#servicios">Servicios</a> 
-            <a href="#casos-exito">Casos de Éxito</a>
-            <a href="#contacto">Contáctanos</a> 
+            
+            <!-- Botón hamburguesa (solo visible en móvil) -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#servicios">Servicios</a> 
+                <a href="#casos-exito">Casos de Éxito</a>
+                <a href="#contacto">Contáctanos</a> 
             </nav>
         </div>
     </header>
@@ -690,6 +754,23 @@ document.getElementById('contactForm').addEventListener('submit', async function
     }
 }
 </style>
+<script>
+// Menú hamburguesa
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
 
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Cerrar menú al hacer clic en un enlace
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
+}
+</script>
 </body>
 </html>
